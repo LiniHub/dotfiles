@@ -27,6 +27,3 @@ opt.splitright = true
 opt.splitbelow = true
 opt.cmdheight = 0
 opt.scrolloff = 5
-for _, file in ipairs(vim.fn.glob(vim.fn.stdpath("config") .. "/plugins/*.lua", false, true)) do
-  dofile(file)
-end

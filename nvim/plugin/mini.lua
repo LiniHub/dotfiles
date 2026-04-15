@@ -1,11 +1,20 @@
-vim.pack.add({{ src = "https://github.com/nvim-mini/mini.nvim"}})
+vim.pack.add { src = 'https://github.com/nvim-mini/mini.nvim' }
+
+require('mini.bufremove').setup()
+require('mini.comment').setup()
+require('mini.cursorword').setup()
+require('mini.icons').setup()
+require('mini.jump').setup { silent = true }
+require('mini.jump2d').setup { silent = true }
+require('mini.move').setup()
+require('mini.pairs').setup()
+require('mini.splitjoin').setup()
+require('mini.surround').setup()
 
 require('mini.basics').setup {
 	options = { extra_ui = true },
 	mappings = { windows = true },
 }
-
-require('mini.')
 
 local function extra_mode_status()
 	-- recording macros
@@ -53,9 +62,15 @@ require('mini.statusline').setup {
 	},
 }
 
-
 require('mini.files').setup {
 	windows = { preview = true },
 }
+vim.keymap.set('n', '-', MiniFiles.open, { desc = 'Mini Files' })
 
-vim.keymap.set('n', '-', MiniFiles.open, { desc='Mini Files' })
+local snippets = require('mini.snippets')
+local gen_loader = snippets.gen_loader
+snippets.setup {
+	snippets = {
+		gen_loader.from_lang(),
+	},
+}
